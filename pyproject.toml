@@ -1,0 +1,86 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "TG PLUS"
+version = "0.0.1"
+description = "Add utils to your telegram account"
+authors = ["onazeron"]
+readme = "README.md"
+repository = "https://github.com/wakaree/aiogram_bot_template"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+asyncpg = "0.29.0"
+sqlalchemy = "^2.0.29"
+pydantic = "^2.5.3"
+pydantic_settings = "^2.1.0"
+TgCrypto = "1.2.5"
+pyrogram = { git = "https://github.com/KurimuzonAkuma/pyrogram.git", branch = "dev" }
+
+[tool.poetry.group.dev.dependencies]
+libcst = "^1.2.0"
+black = "^24.4.0"
+mypy = "^1.8.0"
+ruff = "^0.3.7"
+
+[tool.black]
+line-length = 99
+exclude = "\\.?venv|\\.cache"
+
+[tool.ruff]
+target-version = "py38"
+line-length = 99
+exclude = [
+    ".git",
+    ".venv",
+    ".idea",
+    ".tests",
+    ".cache",
+    "build",
+    "dist",
+    "scripts",
+]
+
+[tool.ruff.lint]
+select = [
+    "C",
+    "DTZ",
+    "E",
+    "F",
+    "I",
+    "ISC",
+    "N",
+    "PLC",
+    "PLE",
+    "Q",
+    "W",
+    "YTT",
+    "RET",
+    "SIM",
+    "ASYNC",
+]
+
+
+[tool.mypy]
+plugins = [
+    "sqlalchemy.ext.mypy.plugin",
+    "pydantic.mypy"
+]
+exclude = [
+    ".git",
+    ".venv",
+    ".idea",
+    ".tests",
+    ".cache",
+    "build",
+    "dist",
+    "scripts",
+]
+
+
+[[tool.mypy.overrides]]
+module = ["src.telegram.user_bot.handlers.*"]
+strict_optional = false
+warn_return_any = false
